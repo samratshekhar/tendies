@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "name": "Reuters Markets",
+      "type": "rss",
+      "url": "https://feeds.reuters.com/reuters/marketsNews",
+      "category": "macro",
+      "priority": 1,
+      "update_frequency_minutes": 30
+    },
+    {
+      "name": "Yahoo Finance",
+      "type": "rss",
+      "url": "https://finance.yahoo.com/rss/",
+      "category": "equities",
+      "priority": 2,
+      "update_frequency_minutes": 30
+    }
+  ]
+}
