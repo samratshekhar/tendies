@@ -13,6 +13,11 @@ CREATE TABLE IF NOT EXISTS raw_articles (
     title TEXT,
     published_at TEXT,
     raw_text TEXT,
+    full_text TEXT,
+    authors TEXT,
+    top_image TEXT,
+    meta_description TEXT,
+    summary TEXT,
     scraped_at TEXT,
     status TEXT
 );
@@ -43,8 +48,8 @@ async def insert_article(db, article: dict):
         """
         INSERT INTO raw_articles
         (id, source, url, url_hash, title, published_at,
-         raw_text, scraped_at, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+         raw_text, full_text, authors, top_image, meta_description, summary, scraped_at, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             article["id"],
@@ -54,6 +59,11 @@ async def insert_article(db, article: dict):
             article["title"],
             article["published_at"],
             article["raw_text"],
+            article["full_text"],
+            article["authors"],
+            article["top_image"],
+            article["meta_description"],
+            article["summary"],
             article["scraped_at"],
             "scraped",
         ),

@@ -1,11 +1,19 @@
 {
   "sources": [
     {
-      "name": "Reuters Markets",
+      "name": "5paisa",
       "type": "rss",
-      "url": "https://feeds.reuters.com/reuters/marketsNews",
+      "url": "https://www.5paisa.com/rss/news.xml",
       "category": "macro",
       "priority": 1,
+      "update_frequency_minutes": 30
+    },
+    {
+      "name": "EconomicTimes",
+      "type": "rss",
+      "url": "https://b2b.economictimes.indiatimes.com/rss/recentstories",
+      "category": "equities",
+      "priority": 2,
       "update_frequency_minutes": 30
     },
     {
@@ -13,7 +21,7 @@
       "type": "rss",
       "url": "https://finance.yahoo.com/rss/",
       "category": "equities",
-      "priority": 2,
+      "priority": 3,
       "update_frequency_minutes": 30
     }
   ]

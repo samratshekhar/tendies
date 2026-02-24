@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+from datetime import datetime, timezone
 
 # Ensure project root is on sys.path so package imports work
 # when running the script directly (e.g. `python workflows/scrape.py`).
@@ -27,7 +28,8 @@ def main():
 
 
 async def scrape_rss():
-    print("[bold green]Initializing database...[/bold green]")
+    start = datetime.now(timezone.utc).isoformat()
+    print(f"[bold green]Initializing at {start}[/bold green]")
     await init_db()
 
     with open(CONFIG_PATH) as f:
@@ -41,16 +43,20 @@ async def scrape_rss():
             if source["type"] != "rss":
                 continue
 
-            print(f"[blue]Fetching {source['name']}[/blue]")
+            print(f"[blue]Fetching start {source['name']}[/blue]")
 
-            articles = parse_feed(source["url"], source["name"])
+            # Parse the feed using the open database connection so that
+            # `parse_feed` can check for existing url hashes before
+            # enriching or collecting an article.
+            articles = await parse_feed(db, source["url"], source["name"])
 
             for article in articles:
-                if not await article_exists(db, article["url_hash"]):
-                    await insert_article(db, article)
-                    total_inserted += 1
-
-        print(f"[bold yellow]Inserted {total_inserted} new articles.[/bold yellow]")
+                # if not await article_exists(db, article["url_hash"]):
+                await insert_article(db, article)
+                total_inserted += 1
+        end = datetime.now(timezone.utc).isoformat()
+        runtime = (datetime.fromisoformat(end) - datetime.fromisoformat(start)).total_seconds()
+        print(f"[bold yellow]Inserted {total_inserted} new articles at {end} with a runtime of {runtime:.2f} seconds.[/bold yellow]")
 
 
 if __name__ == "__main__":

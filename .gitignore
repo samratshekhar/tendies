@@ -1,1 +1,81 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# =========================
+# SQLite / Local DB
+# =========================
+db/*.db
+db/*.sqlite
+db/*.sqlite3
+
+# WAL files
+*.db-wal
+*.db-shm
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+*.env
+
+# =========================
+# macOS
+# =========================
+.DS_Store
+
+# =========================
+# Docker
+# =========================
+docker-compose.override.yml
+*.tar
+
+# =========================
+# IDE / Editors
+# =========================
+.vscode/
+.idea/
+*.iml
+
+# =========================
+# Testing / Coverage
+# =========================
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+
+# =========================
+# Jupyter (if used later)
+# =========================
 .ipynb_checkpoints/
+
+# =========================
+# Temporary files
+# =========================
+*.swp
+*.swo
+*~
